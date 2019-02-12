@@ -35,7 +35,57 @@ function displayBoard(board){
 	}
 }
 
+function countMines(c){
+	let id = c.toString();
+	let count = 0;
+	for (let i =0; i<width; i++){
+		for (let j = 0; j<height; j++){
+			if(count == c){
+				let nmines = 0;
+				if(board[i][j]==0){
+					if((i+1)<width){
+						if(board[i+1][j] == 1)
+							nmines++;
+						if((j+1)<height)
+							if(board[i+1][j+1] == 1)
+								nmines++;
+						if((j-1) >= 0)
+							if(board[i+1][j-1] == 1)
+								nmines++;
+					}
+					if((i-1)>=0)
+						if(board[i-1][j] == 1)
+							nmines++;
+					if((j+1)<height)
+						if(board[i][j+1] == 1)
+							nmines++;
+					if((j-1)>=0)
+						if(board[i][j-1] == 1)
+							nmines++;
+					if((i-1) >=0 && (j-1) >=0)
+						if(board[i-1][j-1] == 1)
+							nmines++;
+					if((i-1) >=0 && (j+1) <height)
+						if(board[i-1][j+1] == 1)
+							nmines++;
+				}
+			if(board[i][j] == 1){
+				document.getElementById(id).value = 'B';
+			}
+			else{
+				if(nmines !=0)
+					document.getElementById(id).value = nmines;
+				else
+					document.getElementById(id).value = '  ';
+			}
+			}
+			count++;
+		}
+	}
+}
+
 function reveal(c){
 	let id = c.toString();
+	countMines(c);
 	document.getElementById(id).disabled = true;
 }
