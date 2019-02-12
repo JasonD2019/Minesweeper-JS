@@ -8,13 +8,25 @@ for (let i=0;i<width;i++){
 	}
 }
 
+setMines(mines);
+
+function setMines(nmines){
+	if(nmines !=0){
+		let x = Math.floor(Math.random()*width);
+		let y = Math.floor(Math.random()*height);
+		board[x][y] = 1;
+		nmines--;
+		setMines(nmines);
+	}
+}
+
 displayBoard(board);
 
 function displayBoard(board){
 	let count = 0;
 	for (let i = 0; i<width; i++){
 		for (let j = 0; j<height;j++){
-		document.write("<input type='button' id='abc' value='  ' onclick='reveal(id)' oncontextmenu='flag(id);return false;'></input>");
+		document.write("<input type='button' id='abc' value='  ' onclick='reveal(id)' oncontextmenu='return false;'></input>");
 		document.getElementById("abc").value=board[i][j];
 		document.getElementById("abc").id= count;
 		count++;
