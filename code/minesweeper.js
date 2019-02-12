@@ -1,6 +1,6 @@
 let board = [];
-let width = 3, height = 3;
-let mines = 4;
+let width = 9, height = 9;
+let mines = 10;
 for (let i=0;i<width;i++){
 	board[i] = []
     for (let j = 0;j<height;j++){
@@ -40,8 +40,8 @@ function countMines(c){
 	let count = 0;
 	for (let i =0; i<width; i++){
 		for (let j = 0; j<height; j++){
+			let nmines = 0;
 			if(count == c){
-				let nmines = 0;
 				if(board[i][j]==0){
 					if((i+1)<width){
 						if(board[i+1][j] == 1)
