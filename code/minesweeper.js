@@ -34,3 +34,8 @@ function displayBoard(board){
 		document.write("<br>");
 	}
 }
+
+function reveal(c){
+	let id = c.toString();
+	document.getElementById(id).disabled = true;
+}
