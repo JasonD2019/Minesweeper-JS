@@ -26,7 +26,7 @@ function displayBoard(board){
 	let count = 0;
 	for (let i = 0; i<width; i++){
 		for (let j = 0; j<height;j++){
-		document.write("<input type='button' id='abc' value='  ' onclick='reveal(id)' oncontextmenu='return false;'></input>");
+		document.write("<input type='button' id='abc' value='  ' onclick='reveal(id)' oncontextmenu='flag(id); return false;'></input>");
 		document.getElementById("abc").value=board[i][j];
 		document.getElementById("abc").id= count;
 		count++;
@@ -81,6 +81,21 @@ function countMines(c){
 			}
 			count++;
 		}
+	}
+}
+
+function flag(c){
+	let id = c.toString();
+	switch(document.getElementById(id).value){
+		case 'F': 
+					document.getElementById(id).value = '?';
+					break;
+		case '?': 
+					document.getElementById(id).value = '  ';
+					break;
+		default:
+					document.getElementById(id).value = 'F';
+					break;
 	}
 }
 
