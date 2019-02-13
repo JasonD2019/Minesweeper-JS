@@ -1,8 +1,9 @@
 let board = [];
+let rcount=0;
 let width = 9, height = 9;
 let mines = 10;
 for (let i=0;i<width;i++){
-	board[i] = []
+	board[i] = [];
     for (let j = 0;j<height;j++){
         board[i][j] = 0;
 	}
@@ -14,8 +15,10 @@ function setMines(nmines){
 	if(nmines !=0){
 		let x = Math.floor(Math.random()*width);
 		let y = Math.floor(Math.random()*height);
-		board[x][y] = 1;
-		nmines--;
+		if(!(board[x][y]==1)){
+			board[x][y] = 1;
+			nmines--;
+		}
 		setMines(nmines);
 	}
 }
@@ -53,8 +56,9 @@ function countMines(x,y,c){
 		document.getElementById(c).value = 'B';
 	}
 	else{
-		if(nmines !=0)
+		if(nmines !=0){
 			document.getElementById(c).value = nmines;
+		}
 		else{
 			document.getElementById(c).value = '  ';
 		}
@@ -76,6 +80,11 @@ function flag(c){
 }
 
 function reveal(c){
+	if(rcount>=8){
+		rcount = 0;
+		return;
+	}
+	rcount++;
 	let x = c[0];
 	let y = c[1];
 	let ix = parseInt(x,10);
@@ -97,6 +106,8 @@ function reveal(c){
 							reveal(tc);
 							return;
 						}
+						//else
+							//rcount++;
 					}
 				}
 			}
