@@ -23,84 +23,83 @@ function setMines(nmines){
 displayBoard(board);
 
 function displayBoard(board){
-	let count = 0;
 	for (let i = 0; i<width; i++){
 		for (let j = 0; j<height;j++){
 		document.write("<input type='button' id='abc' value='  ' onclick='reveal(id)' oncontextmenu='flag(id); return false;'></input>");
 		document.getElementById("abc").value=board[i][j];
-		document.getElementById("abc").id= count;
-		count++;
+		document.getElementById("abc").id= "" + i + j;
 		}
 		document.write("<br>");
 	}
 }
 
-function countMines(c){
-	let id = c.toString();
-	let count = 0;
-	for (let i =0; i<width; i++){
-		for (let j = 0; j<height; j++){
-			let nmines = 0;
-			if(count == c){
-				if(board[i][j]==0){
-					if((i+1)<width){
-						if(board[i+1][j] == 1)
-							nmines++;
-						if((j+1)<height)
-							if(board[i+1][j+1] == 1)
-								nmines++;
-						if((j-1) >= 0)
-							if(board[i+1][j-1] == 1)
-								nmines++;
-					}
-					if((i-1)>=0)
-						if(board[i-1][j] == 1)
-							nmines++;
-					if((j+1)<height)
-						if(board[i][j+1] == 1)
-							nmines++;
-					if((j-1)>=0)
-						if(board[i][j-1] == 1)
-							nmines++;
-					if((i-1) >=0 && (j-1) >=0)
-						if(board[i-1][j-1] == 1)
-							nmines++;
-					if((i-1) >=0 && (j+1) <height)
-						if(board[i-1][j+1] == 1)
-							nmines++;
+function countMines(x,y,c){
+	let nx,ny;
+	let nmines=0;
+	if(board[x][y]==0){
+		for(let i=-1;i<=1;i++){
+			for(let j=-1;j<=1;j++){
+				nx = x + i;
+				ny = y +j;
+				if(!(i == 0 && j == 0)){
+					if(nx >= 0 && nx <width && ny >= 0 && ny < height)
+						if(board[nx][ny]==1)
+						nmines++;
 				}
-			if(board[i][j] == 1){
-				document.getElementById(id).value = 'B';
 			}
-			else{
-				if(nmines !=0)
-					document.getElementById(id).value = nmines;
-				else
-					document.getElementById(id).value = '  ';
-			}
-			}
-			count++;
+		}
+	}
+	if(board[x][y] == 1){
+		document.getElementById(c).value = 'B';
+	}
+	else{
+		if(nmines !=0)
+			document.getElementById(c).value = nmines;
+		else{
+			document.getElementById(c).value = '  ';
 		}
 	}
 }
 
 function flag(c){
-	let id = c.toString();
-	switch(document.getElementById(id).value){
+	switch(document.getElementById(c).value){
 		case 'F': 
-					document.getElementById(id).value = '?';
+					document.getElementById(c).value = '?';
 					break;
 		case '?': 
-					document.getElementById(id).value = '  ';
+					document.getElementById(c).value = '  ';
 					break;
 		default:
-					document.getElementById(id).value = 'F';
+					document.getElementById(c).value = 'F';
 					break;
 	}
 }
 
 function reveal(c){
-	let id = c.toString();
-	countMines(c);
-	document.getElementById(id).disabled = true;
+	let x = c[0];
+	let y = c[1];
+	let ix = parseInt(x,10);
+	let iy = parseInt(y,10);
+	countMines(ix,iy,c);
+	document.getElementById(c).disabled = true;
+	if(board[ix][iy] == 0){
+		let nx=0;
+		let ny=0;
+		let tc;
+		for (let i = -1; i<=1;i++){
+			for (let j = -1; j<=1; j++){
+				nx = ix + i;
+				ny = iy +j;
+				if(!(i == 0 && j == 0)){
+					if(nx >= 0 && nx <width && ny >= 0 && ny < height){
+						tc = "" + nx + ny;
+						if(board[nx][ny]==0 && !document.getElementById(tc).disabled){
+							reveal(tc);
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
 }
