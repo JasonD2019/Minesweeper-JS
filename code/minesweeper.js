@@ -14,8 +14,11 @@ function setMines(nmines){
 	if(nmines !=0){
 		let x = Math.floor(Math.random()*width);
 		let y = Math.floor(Math.random()*height);
-		board[x][y] = 1;
-		nmines--;
+//	make sure that we have 10 different mines, or we may lost some mines
+		if (board[x][y] == 0){             
+			board[x][y] = 1;
+			nmines--;
+		}
 		setMines(nmines);
 	}
 }
