@@ -52,6 +52,9 @@ class Board{
 			}
 		}
 	}
+
+	// creat 10 different mines to board
+	// nmines is the number of mines
 	initMines(nmines){
 		if(nmines !=0){
 			let x = Math.floor(Math.random()*this.width);
@@ -63,6 +66,8 @@ class Board{
 			this.initMines(nmines);
 		}
 	}
+
+	//	display the board
 	displayBoard(){
 		console.table(this.board);
 		for (let i = 0; i<this.width; i++){
@@ -73,6 +78,8 @@ class Board{
 		}
 		console.table(this.nmines_array);
 	}
+
+	//initialize the map add number to each spot
 	countMines(x,y){
 	let nx,ny;
 	let nmines=0;
@@ -136,7 +143,7 @@ function displayBoard(board){
 		document.getElementById("abc").value=board[i][j];
 		document.getElementById("abc").id= "" + i + j;
 		}
-		document.write("<br>");
+		document.fwrite("<br>");
 	}
 }
 
