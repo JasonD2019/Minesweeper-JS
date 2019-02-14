@@ -1,5 +1,4 @@
 class Board{
-	//test file
 	constructor (level,h,w,m){
 		this.board = [];
 		this.nmines_array = [];
@@ -43,6 +42,8 @@ class Board{
 	width(w){
 		this.width =w;
 	}
+	
+	// creat the 2d array for the board
 	initboard(){
 		for (let i=0;i<this.width;i++){
 			this.board[i] = [];
@@ -54,7 +55,7 @@ class Board{
 		}
 	}
 
-	// creat 10 different mines to board
+	// add mines to board
 	// nmines is the number of mines
 	initMines(nmines){
 		if(nmines !=0){
@@ -68,7 +69,7 @@ class Board{
 		}
 	}
 
-	//	display the board
+	//	display the board in console
 	displayBoard(){
 		console.table(this.board);
 		for (let i = 0; i<this.width; i++){
