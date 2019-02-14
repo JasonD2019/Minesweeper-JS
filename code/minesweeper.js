@@ -1,4 +1,5 @@
 class Board{
+	//test file
 	constructor (level,h,w,m){
 		this.board = [];
 		this.nmines_array = [];
