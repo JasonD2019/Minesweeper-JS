@@ -1,6 +1,7 @@
 class Board{
 	constructor (level){
 		this.board = [];
+		this.nmines_array = [];
 		switch(level){
 			case "b":
 					this.height(3);
@@ -31,8 +32,10 @@ class Board{
 	initboard(){
 		for (let i=0;i<this.width;i++){
 			this.board[i] = [];
+			this.nmines_array[i] = [];
 			for (let j = 0;j<this.height;j++){
 				this.board[i][j] = 0;
+				this.nmines_array[i][j]=0;
 			}
 		}
 	}
@@ -48,20 +51,41 @@ class Board{
 		}
 	}
 	displayBoard(){
+		console.table(this.board);
 		for (let i = 0; i<this.width; i++){
 			for (let j = 0; j<this.height;j++){
-			console.log(this.board[i][j]);
+			this.nmines_array[i][j] = this.countMines(i,j);
 			}
-			console.log("");
+			//console.log("");
+		}
+		console.table(this.nmines_array);
+	}
+	countMines(x,y){
+	let nx,ny;
+	let nmines=0;
+	if(this.board[x][y]==0){
+		for(let i=-1;i<=1;i++){
+			for(let j=-1;j<=1;j++){
+				nx = x + i;
+				ny = y +j;
+				if(!(i == 0 && j == 0)){
+					if(nx >= 0 && nx <this.width && ny >= 0 && ny < this.height)
+						if(this.board[nx][ny]==1)
+						nmines++;
+				}
+			}
 		}
 	}
-	countMines(){
-		return (this.mines);
+	if(this.board[x][y] == 1){
+		return(100);
 	}
-
+	else{
+		return(nmines);
+	}
+	}
 }
 
-let gameBoard = new Board("b");
+let gameBoard = new Board("e");
 gameBoard.displayBoard();
 
 
