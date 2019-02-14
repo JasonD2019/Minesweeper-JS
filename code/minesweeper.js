@@ -1,27 +1,40 @@
 class Board{
-	constructor (level){
+	constructor (level,h,w,m){
 		this.board = [];
 		this.nmines_array = [];
 		switch(level){
 			case "b":
 					this.height(3);
 					this.width(3);
+					this.mines(4);
 					this.initboard();
-					this.initMines(4);
+					this.initMines(this.mines);
 					break;
 			case "e":
 					this.height(9);
 					this.width(9);
+					this.mines(10);
 					this.initboard();
-					this.initMines(10);
+					this.initMines(this.mines);
+					break;
+			case "":
+					this.height(h);
+					this.width(w);
+					this.mines(m);
+					this.initboard();
+					this.initMines(this.mines);
 					break;
 			default:
 					this.height(5);
 					this.width(5);
+					this.mines(6);
 					this.initboard();
-					this.initMines(6);
+					this.initMines(this.mines);
 					break;
 		}
+	}
+	mines(n){
+		this.mines = n;
 	}
 	height(h){
 		this.height = h;
@@ -39,7 +52,7 @@ class Board{
 			}
 		}
 	}
-	initMines(nmines,board){
+	initMines(nmines){
 		if(nmines !=0){
 			let x = Math.floor(Math.random()*this.width);
 			let y = Math.floor(Math.random()*this.height);
@@ -77,7 +90,7 @@ class Board{
 		}
 	}
 	if(this.board[x][y] == 1){
-		return(100);
+		return("B");
 	}
 	else{
 		return(nmines);
@@ -85,9 +98,9 @@ class Board{
 	}
 }
 
-let gameBoard = new Board("e");
+let gameBoard = new Board("",9,9,20);
 gameBoard.displayBoard();
-
+console.log(gameBoard.mines);
 
 /*let board = [];
 let rcount=0;
