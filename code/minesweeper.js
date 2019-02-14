@@ -102,6 +102,42 @@ let gameBoard = new Board("",9,9,20);
 gameBoard.displayBoard();
 console.log(gameBoard.mines);
 
+class Graphics{
+	constructor(){
+		this.comp = [];
+		this.canvas = document.createElement("canvas");
+		this.canvas.width = gameBoard.width*50;
+		this.canvas.height = gameBoard.height*50;
+		this.canvas.style = "border: 1px solid #d3d3d3";
+		this.context = this.canvas.getContext("2d");
+		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+		this.draw();		
+		}
+	component(x,y,t="0"){
+		this.width = 50;
+		this.height = 50;
+		this.x = x;
+		this.y =y;
+		this.context.strokeRect(this.x, this.y, this.width, this.height);
+		this.context.fillText(t,x+25,y+25);
+	}
+	draw(){
+		for(let i =0; i<gameBoard.width;i++){
+			this.comp[i] = [];
+			for(let j =0; j<gameBoard.height;j++){
+				let tc = "" + gameBoard.nmines_array[i][j];
+				this.comp[i][j] = this.component(i*50,j*50,tc);
+			}
+		}
+	}
+}
+
+let gfx = new Graphics();
+/*gfx.component(0,0);
+gfx.component(0,gfx.height*9);
+gfx.component(gfx.width*9,0);
+gfx.component(gfx.width*9,gfx.height*9);*/
+
 /*let board = [];
 let rcount=0;
 let width = 9, height = 9;
