@@ -107,6 +107,10 @@ class Board{
 	}
 }
 
+class UIclass{
+	
+}
+
 let gameBoard = new Board("",9,9,20);
 gameBoard.displayBoard();
 console.log(gameBoard.mines);
