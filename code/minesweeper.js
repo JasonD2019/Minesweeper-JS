@@ -175,14 +175,23 @@ function clickHandler(e){
 		}
 		if(gameBoard.nmines_array[y][x]==9){
 			alert("Game Over!");
-			//need to restart the game 
-			history.go(0);
-			//GameReset();
+			let choice=prompt("Do you want to play again? y/n")
+			if(choice == "y"){
+				history.go(0);
+			}
+			if(choice =="n"){
+				window.close();
+			}
 		}
 		if (CheckWin()==true){
 			alert("You are win!");
-			//need to restart the game 
-			GameReset();
+			let choice=prompt("Do you want to play again? y/n")
+			if(choice =="y"){
+				history.go(0);
+			}
+			if(choice =="n"){
+				window.close();
+			}
 		}
 	}
 	else{
@@ -223,10 +232,22 @@ function WhenChick_0(y,x){
 }
 
 function CheckWin(){
-	over = true;
+	let over = true;
+	let n_mine_flag = 0;
 	for (let i = 0; i < gameBoard.width; i++){
 		for (let j = 0; j < gameBoard.height; j++){
-			if (gameBoard.nmines_array[i][j] < 9){				
+			if (gameBoard.nmines_array[i][j] == 29){
+				n_mine_flag++;
+			}
+		}
+	}
+	if (n_mine_flag == gameBoard.mines)
+	{
+		return over;
+	}
+	for (let i = 0; i < gameBoard.width; i++){
+		for (let j = 0; j < gameBoard.height; j++){
+			if (gameBoard.nmines_array[i][j] < 9 || (gameBoard.nmines_array[i][j] > 19 && gameBoard.nmines_array[i][j] < 29)){ // has wrong flag				
 				over = false;
 			}
 		}
