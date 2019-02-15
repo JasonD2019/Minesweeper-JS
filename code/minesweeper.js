@@ -178,10 +178,24 @@ function clickHandler(e){
 		if(gameBoard.nmines_array[y][x]==9){
 			alert("Game Over!");
 			//need to restart the game 
+			let choice=prompt("Do you want to play again? y/n")
+			if(choice =="y" || "Y")
+			{history.go(0);}//reload the webpage to reset game
+			if(choice !="n" || "N")//if choice n quit game
+			{
+				window.close();
+			}
 		}
 		if (CheckWin()==true){
 			alert("You are win!");
 			//need to restart the game 
+			let choice=prompt("Do you want to play again? y/n")
+			if(choice =="y" || "Y")
+			{history.go(0);}//reload the webpage to reset game
+			if(choice !="n" || "N")//if choice n quit game
+			{
+				window.close();
+			}
 		}
 	}
 	else{
