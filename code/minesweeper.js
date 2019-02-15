@@ -188,21 +188,25 @@ function clickHandler(e){
 		rightClick = (e.which === 3);
 	}
 	if(!rightClick){
-		if((gameBoard.nmines_array[y][x]!=0)&&(gameBoard.nmines_array[y][x]!=9)){
+		if((gameBoard.nmines_array[y][x]>0)&&(gameBoard.nmines_array[y][x]<9)){
 			tc =  "" + gameBoard.nmines_array[y][x];
 			gfx.component(x*50,y*50,"");
 			gfx.component(x*50,y*50,tc);
+			gameBoard.nmines_array[y][x] = gameBoard.nmines_array[y][x]+10;
 		}
 		if(gameBoard.nmines_array[y][x]==0){
 			WhenChick_0(y,x);
 		}
 		if(gameBoard.nmines_array[y][x]==9){
-			
+			// game over: lose :(
 		}
 	}
 	else{
 		tc = "F";
 		gfx.component(x*50,y*50,tc);
+	}
+	if (CheckWin()==true){
+		// game over: win!
 	}
 }
 
@@ -224,5 +228,17 @@ function WhenChick_0(y,x){
 		tc =  "" + gameBoard.nmines_array[y][x];
 		gfx.component(x*50,y*50,"");
 		gfx.component(x*50,y*50,tc);
+		gameBoard.nmines_array[y][x] = gameBoard.nmines_array[y][x]+10;
+	}
+}
+
+function CheckWin(){
+	let over = true;
+	for (let i = 0; i <= gameBoard.width; i++){
+		for (let j = 0; j <= gameBoard.heighr; j++){
+			if (gameBoard.nmines_array[i][j] < 9){				
+				return false;
+			}
+		}
 	}
 }
