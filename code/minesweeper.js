@@ -133,10 +133,10 @@ class Graphics{
 
 let gfx = new Graphics();
 
-gfx.canvas.addEventListener('click',reveal);
-gfx.canvas.addEventListener('contextmenu',reveal);
+gfx.canvas.addEventListener('click',clickHandler);
+gfx.canvas.addEventListener('contextmenu',clickHandler);
 
-function reveal(e){
+function clickHandler(e){
 	e.preventDefault();
 	let tc ="";
 	let clickX = e.pageX - gfx.canvas.offsetLeft;
