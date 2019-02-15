@@ -1,5 +1,4 @@
-//remain problem: gameover alert
-//cancel flag on left-click
+//cancel flag on right-click
 class Board{
 	constructor (level,h,w,m){
 		this.board = [];
@@ -71,7 +70,6 @@ class Board{
 			for (let j = 0; j<this.height;j++){
 			this.nmines_array[i][j] = this.countMines(i,j);
 			}
-			//console.log("");
 		}
 		console.table(this.nmines_array);
 	}
@@ -109,39 +107,6 @@ class UIclass{
 		
 	}
 
-	reveal(c){
-		if(rcount>=8){
-			rcount = 0;
-			return;
-		}
-		rcount++;
-		let x = c[0];
-		let y = c[1];
-		let ix = parseInt(x,10);
-		let iy = parseInt(y,10);
-		countMines(ix,iy,c);
-		document.getElementById(c).disabled = true;
-		if(board[ix][iy] == 0){
-			let nx=0;
-			let ny=0;
-			let tc;
-			for (let i = -1; i<=1;i++){
-				for (let j = -1; j<=1; j++){
-					nx = ix + i;
-					ny = iy +j;
-					if(!(i == 0 && j == 0)){
-						if(nx >= 0 && nx <width && ny >= 0 && ny < height){
-							tc = "" + nx + ny;
-							if(board[nx][ny]==0 && !document.getElementById(tc).disabled){
-								reveal(tc);
-								return;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
 }
 
 class Graphics{
@@ -200,14 +165,12 @@ function clickHandler(e){
 			WhenChick_0(y,x);
 		}
 		if(gameBoard.nmines_array[y][x]==9){
-			// game over: lose :(
-			//console.log("lose");
-           alert("game over!");
+			alert("Game Over!");
+			//need to restart the game 
 		}
 		if (CheckWin()==true){
-			// game over: win!
-			//console.log("win");
-			alert("game over!");
+			alert("You are win!");
+			//need to restart the game 
 		}
 	}
 	else{
