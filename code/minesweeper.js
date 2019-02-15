@@ -105,6 +105,7 @@ console.log(gameBoard.mines);
 class Graphics{
 	constructor(){
 		this.comp = [];
+		this.clicked = [];
 		this.canvas = document.createElement("canvas");
 		this.canvas.width = gameBoard.width*50;
 		this.canvas.height = gameBoard.height*50;
@@ -116,15 +117,15 @@ class Graphics{
 	component(x,y,t=""){
 		this.width = 50;
 		this.height = 50;
-		this.x = x;
-		this.y =y;
-		this.context.strokeRect(this.x, this.y, this.width, this.height);
+		this.context.strokeRect(x, y, this.width, this.height);
 		this.context.fillText(t,x+25,y+25);
 	}
 	draw(){
 		for(let i =0; i<gameBoard.width;i++){
 			this.comp[i] = [];
+			this.clicked[i] = [];
 			for(let j =0; j<gameBoard.height;j++){
+				this.clicked[i][j]=false;
 				this.comp[i][j] = this.component(i*50,j*50);
 			}
 		}
@@ -147,9 +148,14 @@ function clickHandler(e){
 	if(e.which){
 		rightClick = (e.which === 3);
 	}
+	if(!gfx.clicked[x][y]){
+		gfx.clicked[x][y]=true;
+		gfx.context.strokeStyle = "red";
 	if(!rightClick){
-	tc =  "" + gameBoard.nmines_array[x][y];
-	gfx.component(x*50,y*50,"");
+	if(gameBoard.nmines_array[x][y] != 0)
+		tc = "" + gameBoard.nmines_array[x][y];
+	else
+		tc = "";
 	gfx.component(x*50,y*50,tc);
 	/*for(let i =0; i<gameBoard.width;i++){
 		for(let j =0; j<gameBoard.height;j++){
@@ -165,6 +171,7 @@ else{
 	tc = "F";
 	gfx.component(x*50,y*50,tc);
 }
+	}
 }
 /*gfx.component(0,0);
 gfx.component(0,gfx.height*9);
