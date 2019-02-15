@@ -199,14 +199,24 @@ function clickHandler(e){
 		}
 		if(gameBoard.nmines_array[y][x]==9){
 			// game over: lose :(
+			console.log("lose");
+		}
+		if (CheckWin()==true){
+			// game over: win!
+			console.log("win");
 		}
 	}
 	else{
 		tc = "F";
-		gfx.component(x*50,y*50,tc);
-	}
-	if (CheckWin()==true){
-		// game over: win!
+		if(gameBoard.nmines_array[y][x]<20)
+		{
+			gameBoard.nmines_array[y][x] += 20;
+			gfx.component(x*50,y*50,tc);
+		}
+		else{
+			gameBoard.nmines_array[y][x] -= 20;
+			// clean the spot
+		}
 	}
 }
 
@@ -233,12 +243,13 @@ function WhenChick_0(y,x){
 }
 
 function CheckWin(){
-	let over = true;
-	for (let i = 0; i <= gameBoard.width; i++){
-		for (let j = 0; j <= gameBoard.heighr; j++){
+	over = true;
+	for (let i = 0; i < gameBoard.width; i++){
+		for (let j = 0; j < gameBoard.height; j++){
 			if (gameBoard.nmines_array[i][j] < 9){				
-				return false;
+				over = false;
 			}
 		}
 	}
+	return over;
 }
