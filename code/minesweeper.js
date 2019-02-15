@@ -179,23 +179,27 @@ function clickHandler(e){
 			alert("Game Over!");
 			//need to restart the game 
 			let choice=prompt("Do you want to play again? y/n")
-			if(choice =="y" || "Y")
+			if(choice =="y" )
 			{history.go(0);}//reload the webpage to reset game
-			if(choice =="n" || "N")//if choice n quit game
+			else if(choice =="n" )//if choice n quit game
 			{
 				window.close();
 			}
+			else{alert("wrong choice");
+			history.go(0);}
 		}
 		if (CheckWin()==true){
 			alert("You are win!");
 			//need to restart the game 
 			let choice=prompt("Do you want to play again? y/n")
-			if(choice =="y" || "Y")
+			if(choice == "y" )
 			{history.go(0);}//reload the webpage to reset game
-			if(choice =="n" || "N")//if choice n quit game
+			else if(choice == "n")//if choice n quit game
 			{
 				window.close();
 			}
+			else{alert("wrong choice");
+			history.go(0);}
 		}
 	}
 	else{
