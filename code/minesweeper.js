@@ -175,23 +175,11 @@ function clickHandler(e){
 		}
 		if(gameBoard.nmines_array[y][x]==9){
 			alert("Game Over!");
-			let choice=prompt("Do you want to play again? y/n")
-			if(choice == "y"){
-				history.go(0);
-			}
-			if(choice =="n"){
-				window.close();
-			}
+			RestartGame();
 		}
 		if (CheckWin()==true){
 			alert("You are win!");
-			let choice=prompt("Do you want to play again? y/n")
-			if(choice =="y"){
-				history.go(0);
-			}
-			if(choice =="n"){
-				window.close();
-			}
+			RestartGame();
 		}
 	}
 	else{
@@ -253,4 +241,14 @@ function CheckWin(){
 		}
 	}
 	return over;
+}
+
+function RestartGame(){
+	let choice=prompt("Do you want to play again? y/n")
+	if(choice =="y"){
+		history.go(0);
+	}
+	else if(choice =="n"){
+		window.close();
+	}
 }
