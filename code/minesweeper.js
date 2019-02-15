@@ -1,8 +1,9 @@
 
-//remain problem: gameover alert
+
 //cancel flag on right-click
-//need a gameover function
-//need a gamereset function
+//check extra flag on checkwin function
+
+
 
 class Board{
 	constructor (level,h,w,m){
