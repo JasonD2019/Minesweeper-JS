@@ -1,3 +1,5 @@
+//remain problem: gameover alert
+//cancel flag on left-click
 class Board{
 	constructor (level,h,w,m){
 		this.board = [];
