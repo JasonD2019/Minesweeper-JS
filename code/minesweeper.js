@@ -107,20 +107,6 @@ class UIclass{
 		
 	}
 
-	ShowBoard(){
-		gameBoard.displayBoard();
-		let count = 0;
-		for (let i = 0; i<gameBoard.width; i++){
-			for (let j = 0; j<gameBoard.height;j++){
-				document.write("<input type='button' id='abc' value='  ' onclick='reveal(id)' oncontextmenu='return false;'></input>");
-				document.getElementById("abc").value=gameBoard.board[i][j];
-				document.getElementById("abc").id= count;
-				count++;
-			}
-			document.write("<br>");
-		}
-	}
-
 	reveal(c){
 		if(rcount>=8){
 			rcount = 0;
