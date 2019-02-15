@@ -1,4 +1,9 @@
+
+//remain problem: gameover alert
 //cancel flag on right-click
+//need a gameover function
+//need a gamereset function
+
 class Board{
 	constructor (level,h,w,m){
 		this.board = [];
@@ -97,10 +102,16 @@ class Board{
 	}
 	}
 }
+	var height;
+	var wide;
+	var minenumber;
+	height = prompt("Enter a height");
+	wide=prompt("Enter a wide");
+    minenumber=prompt("Enter number of mines");
+	let gameBoard = new Board("",height,wide,minenumber);
+	gameBoard.displayBoard();
+	console.log(gameBoard.mines);
 
-let gameBoard = new Board("",9,9,10);
-gameBoard.displayBoard();
-console.log(gameBoard.mines);
 
 class UIclass{
 	constructor(){
