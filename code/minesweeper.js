@@ -1,4 +1,3 @@
-
 //remain problem: gameover alert
 //cancel flag on right-click
 //need a gameover function
@@ -102,16 +101,6 @@ class Board{
 	}
 	}
 }
-	var height;
-	var wide;
-	var minenumber;
-	height = prompt("Enter a height");
-	wide=prompt("Enter a wide");
-    minenumber=prompt("Enter number of mines");
-	let gameBoard = new Board("",height,wide,minenumber);
-	gameBoard.displayBoard();
-	console.log(gameBoard.mines);
-
 
 class UIclass{
 	constructor(){
@@ -149,6 +138,16 @@ class Graphics{
 	}
 }
 
+var height;
+var wide;
+var minenumber;
+height 	= prompt("Enter a height");
+wide = prompt("Enter a wide");
+minenumber = prompt("Enter number of mines");
+
+let gameBoard = new Board("",height,wide,minenumber);
+gameBoard.displayBoard();
+console.log(gameBoard.mines);
 let gfx = new Graphics();
 gfx.canvas.addEventListener('click',clickHandler);
 gfx.canvas.addEventListener('contextmenu',clickHandler);
@@ -177,10 +176,13 @@ function clickHandler(e){
 		if(gameBoard.nmines_array[y][x]==9){
 			alert("Game Over!");
 			//need to restart the game 
+			history.go(0);
+			//GameReset();
 		}
 		if (CheckWin()==true){
 			alert("You are win!");
 			//need to restart the game 
+			GameReset();
 		}
 	}
 	else{
