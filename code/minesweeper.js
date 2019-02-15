@@ -98,7 +98,7 @@ class Board{
 	}
 }
 
-let gameBoard = new Board("",9,9,20);
+let gameBoard = new Board("",9,9,10);
 gameBoard.displayBoard();
 console.log(gameBoard.mines);
 
@@ -113,7 +113,7 @@ class Graphics{
 		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
 		this.draw();		
 		}
-	component(x,y,t="0"){
+	component(x,y,t=""){
 		this.width = 50;
 		this.height = 50;
 		this.x = x;
@@ -125,14 +125,47 @@ class Graphics{
 		for(let i =0; i<gameBoard.width;i++){
 			this.comp[i] = [];
 			for(let j =0; j<gameBoard.height;j++){
-				let tc = "" + gameBoard.nmines_array[i][j];
-				this.comp[i][j] = this.component(i*50,j*50,tc);
+				this.comp[i][j] = this.component(i*50,j*50);
 			}
 		}
 	}
 }
 
 let gfx = new Graphics();
+
+gfx.canvas.addEventListener('click',reveal);
+gfx.canvas.addEventListener('contextmenu',reveal);
+
+function reveal(e){
+	e.preventDefault();
+	let tc ="";
+	let clickX = e.pageX - gfx.canvas.offsetLeft;
+	let clickY = e.pageY - gfx.canvas.offsetTop;
+	let x = Math.floor(clickX/50);
+	let y = Math.floor(clickY/50);
+	let rightClick = false;
+	if(e.which){
+		rightClick = (e.which === 3);
+	}
+	if(!rightClick){
+	tc =  "" + gameBoard.nmines_array[x][y];
+	gfx.component(x*50,y*50,"");
+	gfx.component(x*50,y*50,tc);
+	/*for(let i =0; i<gameBoard.width;i++){
+		for(let j =0; j<gameBoard.height;j++){
+			if(gameBoard.nmines_array[i][j] != 0)
+				tc = "" + gameBoard.nmines_array[i][j];
+			else
+				tc = "";
+				gfx.component(i*50,j*50,tc);
+		}
+	}*/
+}
+else{
+	tc = "F";
+	gfx.component(x*50,y*50,tc);
+}
+}
 /*gfx.component(0,0);
 gfx.component(0,gfx.height*9);
 gfx.component(gfx.width*9,0);
