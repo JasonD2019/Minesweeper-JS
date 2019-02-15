@@ -211,6 +211,8 @@ function clickHandler(e){
 		}
 		else{
 			gameBoard.nmines_array[x][y] -= 20;
+			gfx.context.clearRect(x*50,y*50,50,50);
+			gfx.component(x*50,y*50);
 			// clean the spot
 		}
 	}
