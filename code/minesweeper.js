@@ -71,13 +71,13 @@ class Board{
 		}
 	}
 	displayBoard(){
-		console.table(this.board);
+		//console.table(this.board);
 		for (let i = 0; i<this.width; i++){
 			for (let j = 0; j<this.height;j++){
 			this.nmines_array[i][j] = this.countMines(i,j);
 			}
 		}
-		console.table(this.nmines_array);
+		//console.table(this.nmines_array);
 	}
 	countMines(x,y){
 	let nx,ny;
@@ -111,6 +111,7 @@ class Board{
     minenumber=prompt("Enter number of mines");
 	let gameBoard = new Board("",height,wide,minenumber);
 	gameBoard.displayBoard();
+	console.table(gameBoard.nmines_array);
 	console.log(gameBoard.mines);
 
 
@@ -161,26 +162,26 @@ gfx.canvas.addEventListener('contextmenu',clickHandler);
 function clickHandler(e){
 	e.preventDefault();
 	let tc ="";
-	let clickX = e.pageX - gfx.canvas.offsetLeft;
-	let clickY = e.pageY - gfx.canvas.offsetTop;
+	let clickX = e.pageX; //- gfx.canvas.offsetLeft;
+	let clickY = e.pageY; //- gfx.canvas.offsetTop;
 	let x = Math.floor(clickX/50);
 	let y = Math.floor(clickY/50);
 	let rightClick = false;
 	if(e.which){
 		rightClick = (e.which === 3);
 	}
-	if(!gfx.clicked[x][y])
+	if(!gfx.clicked[y][x])
 	if(!rightClick){
-		gfx.clicked[x][y] = true;
-		if((gameBoard.nmines_array[x][y]>0)&&(gameBoard.nmines_array[x][y]<9)){
-			tc =  "" + gameBoard.nmines_array[x][y];
+		gfx.clicked[y][x] = true;
+		if((gameBoard.nmines_array[y][x]>0)&&(gameBoard.nmines_array[y][x]<9)){
+			tc =  "" + gameBoard.nmines_array[y][x];
 			gfx.component(x*50,y*50,tc);
-			gameBoard.nmines_array[x][y] = gameBoard.nmines_array[x][y]+10;
+			gameBoard.nmines_array[y][x] = gameBoard.nmines_array[y][x]+10;
 		}
-		if(gameBoard.nmines_array[x][y]==0){
-			WhenChick_0(x,y);
+		if(gameBoard.nmines_array[y][x]==0){
+			WhenChick_0(y,x);
 		}
-		if(gameBoard.nmines_array[x][y]==9){
+		if(gameBoard.nmines_array[y][x]==9){
 			alert("Game Over!");
 			//need to restart the game 
 			let choice=prompt("Do you want to play again? y/n")
@@ -194,7 +195,7 @@ function clickHandler(e){
 			history.go(0);}
 		}
 		if (CheckWin()==true){
-			alert("You are win!");
+			alert("You won!");
 			//need to restart the game 
 			let choice=prompt("Do you want to play again? y/n")
 			if(choice == "y" )
@@ -209,13 +210,13 @@ function clickHandler(e){
 	}
 	else{
 		tc = "F";
-		if(gameBoard.nmines_array[x][y]<20)
+		if(gameBoard.nmines_array[y][x]<20)
 		{
-			gameBoard.nmines_array[x][y] += 20;
+			gameBoard.nmines_array[y][x] += 20;
 			gfx.component(x*50,y*50,tc);
 		}
 		else{
-			gameBoard.nmines_array[x][y] -= 20;
+			gameBoard.nmines_array[y][x] -= 20;
 			gfx.context.clearRect(x*50,y*50,50,50);
 			gfx.component(x*50,y*50);
 			// clean the spot
@@ -223,11 +224,11 @@ function clickHandler(e){
 	}
 }
 
-function WhenChick_0(x,y){
-	if(gameBoard.nmines_array[x][y]==0){
-		tc =  "" + gameBoard.nmines_array[x][y];
+function WhenChick_0(y,x){
+	if(gameBoard.nmines_array[y][x]==0){
+		tc =  "" + gameBoard.nmines_array[y][x];
 		gfx.component(x*50,y*50,tc);
-		gameBoard.nmines_array[x][y] = gameBoard.nmines_array[x][y]+10;
+		gameBoard.nmines_array[y][x] = gameBoard.nmines_array[y][x]+10;
 		for (let i =x-1; i <= x+1; i++){
 			for (let j = y-1; j <= y+1; j++){
 				if (i>=0&&i<gameBoard.width&&j>=0&&j<gameBoard.height){	
@@ -237,10 +238,10 @@ function WhenChick_0(x,y){
 			}
 		}
 	}
-	else if(gameBoard.nmines_array[x][y]<=8){
-		tc =  "" + gameBoard.nmines_array[x][y];
+	else if(gameBoard.nmines_array[y][x]<=8){
+		tc =  "" + gameBoard.nmines_array[y][x];
 		gfx.component(x*50,y*50,tc);
-		gameBoard.nmines_array[x][y] = gameBoard.nmines_array[x][y]+10;
+		gameBoard.nmines_array[y][x] = gameBoard.nmines_array[y][x]+10;
 	}
 }
 
