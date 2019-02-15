@@ -206,7 +206,8 @@ function clickHandler(e){
 		}
 		if (CheckWin()==true){
 			// game over: win!
-			console.log("win");
+			//console.log("win");
+			alert("game over!");
 		}
 	}
 	else{
