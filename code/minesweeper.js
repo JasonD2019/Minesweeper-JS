@@ -43,7 +43,6 @@ class Board{
 		this.width =w;
 	}
 	
-	// creat the 2d array for the board
 	initboard(){
 		for (let i=0;i<this.width;i++){
 			this.board[i] = [];
@@ -55,8 +54,6 @@ class Board{
 		}
 	}
 
-	// add mines to board
-	// nmines is the number of mines
 	initMines(nmines){
 		if(nmines !=0){
 			let x = Math.floor(Math.random()*this.width);
@@ -69,19 +66,17 @@ class Board{
 		}
 	}
 
-	//	display the board in console
 	displayBoard(){
 		console.table(this.board);
 		for (let i = 0; i<this.width; i++){
 			for (let j = 0; j<this.height;j++){
 			this.nmines_array[i][j] = this.countMines(i,j);
 			}
-			//console.log("");
 		}
 		console.table(this.nmines_array);
+		console.log(this.mines);
 	}
 
-	//initialize the map add number to each spot
 	countMines(x,y){
 	let nx,ny;
 	let nmines=0;
@@ -108,12 +103,87 @@ class Board{
 }
 
 class UIclass{
-	
-}
+	constructor(gameBoard){
+		
+	}
 
+	ShowBoard(){
+		gameBoard.displayBoard();
+		let count = 0;
+		for (let i = 0; i<gameBoard.width; i++){
+			for (let j = 0; j<gameBoard.height;j++){
+				document.write("<input type='button' id='abc' value='  ' onclick='reveal(id)' oncontextmenu='return false;'></input>");
+				document.getElementById("abc").value=gameBoard.board[i][j];
+				document.getElementById("abc").id= count;
+				count++;
+			}
+			document.write("<br>");
+		}
+	}
+
+	reveal(c){
+		if(rcount>=8){
+			rcount = 0;
+			return;
+		}
+		rcount++;
+		let x = c[0];
+		let y = c[1];
+		let ix = parseInt(x,10);
+		let iy = parseInt(y,10);
+		countMines(ix,iy,c);
+		document.getElementById(c).disabled = true;
+		if(board[ix][iy] == 0){
+			let nx=0;
+			let ny=0;
+			let tc;
+			for (let i = -1; i<=1;i++){
+				for (let j = -1; j<=1; j++){
+					nx = ix + i;
+					ny = iy +j;
+					if(!(i == 0 && j == 0)){
+						if(nx >= 0 && nx <width && ny >= 0 && ny < height){
+							tc = "" + nx + ny;
+							if(board[nx][ny]==0 && !document.getElementById(tc).disabled){
+								reveal(tc);
+								return;
+							}
+							//else
+								//rcount++;
+						}
+					}
+				}
+			}
+		}
+	}
+// 	CheckComplete(){
+// 		let over = 0;
+// 		for (let i = 0; i<this.width; i++){
+// 			for (let j = 0; j<this.height;j++){
+// 				if ()
+// 			}
+// 		}
+// 	}
+// 	Flag(c){
+// 		switch(document.getElementById(c).value){
+// 			case 'F': 
+// 						document.getElementById(c).value = '?';
+// 						break;
+// 			case '?': 
+// 						document.getElementById(c).value = '  ';
+// 						break;
+// 			default:
+// 						document.getElementById(c).value = 'F';
+// 						break;
+// 		}
+// 	}
+}
 let gameBoard = new Board("",9,9,20);
-gameBoard.displayBoard();
-console.log(gameBoard.mines);
+let map = new UIclass(gameBoard);
+map.ShowBoard(); 
+
+// gameBoard.displayBoard();
+// console.log(gameBoard.mines);
 
 /*let board = [];
 let rcount=0;
