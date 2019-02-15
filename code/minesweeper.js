@@ -201,7 +201,8 @@ function clickHandler(e){
 		}
 		if(gameBoard.nmines_array[y][x]==9){
 			// game over: lose :(
-			console.log("lose");
+			//console.log("lose");
+
 		}
 		if (CheckWin()==true){
 			// game over: win!
