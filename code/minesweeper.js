@@ -1,9 +1,5 @@
-
-
-//cancel flag on right-click
-//check extra flag on checkwin function
-
-
+// cancel flag on right-click
+// check extra flag on checkwin function
 
 class Board{
 	constructor (level,h,w,m){
@@ -103,16 +99,6 @@ class Board{
 	}
 	}
 }
-	var height;
-	var wide;
-	var minenumber;
-	height = prompt("Enter a height");
-	wide=prompt("Enter a wide");
-    minenumber=prompt("Enter number of mines");
-	let gameBoard = new Board("",height,wide,minenumber);
-	gameBoard.displayBoard();
-	console.log(gameBoard.mines);
-
 
 class UIclass{
 	constructor(){
@@ -150,8 +136,18 @@ class Graphics{
 	}
 }
 
-let gfx = new Graphics();
+var height;
+var wide;
+var minenumber;
+height = prompt("Enter a height");
+wide=prompt("Enter a wide");
+minenumber=prompt("Enter number of mines");
 
+let gameBoard = new Board("",height,wide,minenumber);
+gameBoard.displayBoard();
+console.log(gameBoard.mines);
+
+let gfx = new Graphics();
 gfx.canvas.addEventListener('click',clickHandler);
 gfx.canvas.addEventListener('contextmenu',clickHandler);
 
@@ -178,29 +174,12 @@ function clickHandler(e){
 		}
 		if(gameBoard.nmines_array[y][x]==9){
 			alert("Game Over!");
-			//need to restart the game 
-			let choice=prompt("Do you want to play again? y/n")
-			if(choice =="y" )
-			{history.go(0);}//reload the webpage to reset game
-			else if(choice =="n" )//if choice n quit game
-			{
-				window.close();
-			}
-			else{alert("wrong choice");
-			history.go(0);}
+			RestartGame();
 		}
 		if (CheckWin()==true){
 			alert("You are win!");
-			//need to restart the game 
 			let choice=prompt("Do you want to play again? y/n")
-			if(choice == "y" )
-			{history.go(0);}//reload the webpage to reset game
-			else if(choice == "n")//if choice n quit game
-			{
-				window.close();
-			}
-			else{alert("wrong choice");
-			history.go(0);}
+			RestartGame();
 		}
 	}
 	else{
@@ -249,4 +228,18 @@ function CheckWin(){
 		}
 	}
 	return over;
+}
+
+function RestartGame(){
+	let choice=prompt("Do you want to play again? y/n")
+	if(choice =="y" ){
+		history.go(0);
+	}
+	else if(choice =="n" ){
+		window.close();
+	}
+	else{
+		alert("wrong choice");
+		history.go(0);
+	}
 }
