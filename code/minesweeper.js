@@ -124,6 +124,7 @@ class UIclass{
 class Graphics{
 	constructor(){
 		this.comp = [];
+		this.clicked = [];
 		this.canvas = document.createElement("canvas");
 		this.canvas.width = gameBoard.width*50;
 		this.canvas.height = gameBoard.height*50;
@@ -143,8 +144,10 @@ class Graphics{
 	draw(){
 		for(let i =0; i<gameBoard.width;i++){
 			this.comp[i] = [];
+			this.clicked[i] = [];
 			for(let j =0; j<gameBoard.height;j++){
 				this.comp[i][j] = this.component(i*50,j*50);
+				this.clicked[i][j] = false;
 			}
 		}
 	}
@@ -166,7 +169,9 @@ function clickHandler(e){
 	if(e.which){
 		rightClick = (e.which === 3);
 	}
+	if(!gfx.clicked[x][y])
 	if(!rightClick){
+		gfx.clicked[x][y] = true;
 		if((gameBoard.nmines_array[x][y]>0)&&(gameBoard.nmines_array[x][y]<9)){
 			tc =  "" + gameBoard.nmines_array[x][y];
 			gfx.component(x*50,y*50,tc);
