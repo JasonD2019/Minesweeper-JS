@@ -109,7 +109,7 @@ class Board{
     minenumber=prompt("Enter number of mines");
 	let gameBoard = new Board("",height,wide,minenumber);
 	gameBoard.displayBoard();
-	console.log(gameBoard.mines);//show total mines in console log
+	console.log(gameBoard.mines);
 
 
 class UIclass{
