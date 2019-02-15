@@ -139,7 +139,6 @@ class Graphics{
 }
 
 let gfx = new Graphics();
-
 gfx.canvas.addEventListener('click',clickHandler);
 gfx.canvas.addEventListener('contextmenu',clickHandler);
 
@@ -182,6 +181,7 @@ function clickHandler(e){
 		}
 		else{
 			gameBoard.nmines_array[y][x] -= 20;
+			// gfx.component(x*50,y*50);
 			// clean the spot
 		}
 	}
