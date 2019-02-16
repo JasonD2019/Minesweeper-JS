@@ -141,16 +141,16 @@ class UI{
 			}
 		}
 	}
-	clickCheck(y,x){
+	clickCheck(x,y){
 		let tc = "";
-		this.revealed[y][x] = true;
+		this.revealed[x][y] = true;
 		gfx.context.strokeStyle = "red";
-		if(this.n_array[y][x]==0){
-			tc =  "" + this.n_array[y][x];
+		if(this.n_array[x][y]==0){
+			tc =  "" + this.n_array[x][y];
 			gfx.component(x*50,y*50,tc);
-			this.n_array[y][x] = this.n_array[y][x]+10;
-			for (let i =y-1; i <= y+1; i++){
-				for (let j = x-1; j <= x+1; j++){
+			this.n_array[x][y] = this.n_array[x][y]+10;
+			for (let i =x-1; i <= x+1; i++){
+				for (let j = y-1; j <= y+1; j++){
 					if (i>=0&&i<gameBoard.width&&j>=0&&j<gameBoard.height){	
 						//if(!(i==0 && j ==0))			
 							this.clickCheck(i,j);
@@ -158,10 +158,10 @@ class UI{
 				}
 			}
 		}
-		else if(this.n_array[y][x]<=8){
-			tc =  "" + this.n_array[y][x];
+		else if(this.n_array[x][y]<=8){
+			tc =  "" + this.n_array[x][y];
 			gfx.component(x*50,y*50,tc);
-			this.n_array[y][x] = this.n_array[y][x]+10;
+			this.n_array[x][y] = this.n_array[x][y]+10;
 		}
 	}
 	
@@ -224,19 +224,19 @@ function clickHandler(e){
 	if(e.which){
 		rightClick = (e.which === 3);
 	}
-	if(!ui.revealed[y][x])
+	if(!ui.revealed[x][y])
 	if(!rightClick){
-		ui.revealed[y][x] = true;
+		ui.revealed[x][y] = true;
 		gfx.context.strokeStyle = "red";
-		if((ui.n_array[y][x]>0)&&(ui.n_array[y][x]<9)){
-			tc =  "" + ui.n_array[y][x];
+		if((ui.n_array[x][y]>0)&&(ui.n_array[x][y]<9)){
+			tc =  "" + ui.n_array[x][y];
 			gfx.component(x*50,y*50,tc);
-			ui.n_array[y][x] = ui.n_array[y][x]+10;
+			ui.n_array[x][y] = ui.n_array[x][y]+10;
 		}
-		if(ui.n_array[y][x]==0){
-			ui.clickCheck(y,x);
+		if(ui.n_array[x][y]==0){
+			ui.clickCheck(x,y);
 		}
-		if(ui.n_array[y][x]==9){
+		if(ui.n_array[x][y]==9){
 			alert("Game Over!");
 			//need to restart the game 
 			//let choice=prompt("Do you want to play again? y/n")
@@ -265,13 +265,13 @@ function clickHandler(e){
 	}
 	else{
 		tc = "F";
-		if(ui.n_array[y][x]<20)
+		if(ui.n_array[x][y]<20)
 		{
-			ui.n_array[y][x] += 20;
+			ui.n_array[x][y] += 20;
 			gfx.component(x*50,y*50,tc);
 		}
 		else{
-			ui.n_array[y][x] -= 20;
+			ui.n_array[x][y] -= 20;
 			gfx.context.clearRect(x*50,y*50,50,50);
 			gfx.component(x*50,y*50);
 			// clean the spot
