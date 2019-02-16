@@ -1,11 +1,18 @@
 // Implement a checkComplete function in class UI
 // Implement correct/incorrect mine flagged functionality
+// Implement Number of mines remaining.
 // Improve the graphics a bit.
 
+
+
+// This is a class for board, the game board is initiallized here with the given width, height,
+// and number of mines
 class Board{
-	constructor (level,h,w,m){
-		this.board = [];
-		this.nmines_array = [];
+	//default constructor of the board class.
+	constructor (level,h,w,m){		
+		this.board = [];			// Initiallizing the board array;
+		this.nmines_array = [];		// Initiallizing the number of mines surrounding array.
+		// Switches between the size of boards;
 		switch(level){
 			case "b":
 					this.height(3);
@@ -13,6 +20,7 @@ class Board{
 					this.mines(4);
 					this.initboard();
 					this.initMines(this.mines);
+					this.initNmines();
 					break;
 			case "e":
 					this.height(9);
@@ -20,6 +28,7 @@ class Board{
 					this.mines(10);
 					this.initboard();
 					this.initMines(this.mines);
+					this.initNmines();
 					break;
 			case "":
 					this.height(h);
@@ -27,6 +36,7 @@ class Board{
 					this.mines(m);
 					this.initboard();
 					this.initMines(this.mines);
+					this.initNmines();
 					break;
 			default:
 					this.height(5);
@@ -34,18 +44,23 @@ class Board{
 					this.mines(6);
 					this.initboard();
 					this.initMines(this.mines);
+					this.initNmines();
 					break;
 		}
 	}
+	// sets the number of mines.
 	mines(n){
 		this.mines = n;
 	}
+	//sets the height of the board;
 	height(h){
 		this.height = h;
 	}
+	// sets the width of the board;
 	width(w){
 		this.width =w;
 	}
+	//Initiallizes the baord array and nmines array with default values, no mines all 0's.
 	initboard(){
 		for (let i=0;i<this.width;i++){
 			this.board[i] = [];
@@ -56,26 +71,29 @@ class Board{
 			}
 		}
 	}
+	//Sets the given number of mines in the board, i.e. initiallize the board array with 1;
 	initMines(nmines){
-		if(nmines !=0){
-			let x = Math.floor(Math.random()*this.width);
+		if(nmines !=0){		// Break condition, breaks when there are no remaining mines to set.
+			let x = Math.floor(Math.random()*this.width); //Get a random x coordinate, multiplying width/height with a random [0,1], and then floor gives us an index in range.
 			let y = Math.floor(Math.random()*this.height);
-			if(!(this.board[x][y]==1)){
+			if(!(this.board[x][y]==1)){		//Checking that we are not placing a mine where one already exists.
 				this.board[x][y] = 1;
 				nmines--;
 			}
-			this.initMines(nmines);
+			this.initMines(nmines); 	// Recursive call to initiallize all the mines.
 		}
 	}
-	displayBoard(){
-		//console.table(this.board);
+
+	//Initiallizes the number of mines arround array with what countMines(x,y) returns and returns a number for nmines_array.
+	initNmines(){
 		for (let i = 0; i<this.width; i++){
 			for (let j = 0; j<this.height;j++){
 			this.nmines_array[i][j] = this.countMines(i,j);
 			}
 		}
-		//console.table(this.nmines_array);
 	}
+
+	// Counts the number of mines surrounding the tile.
 	countMines(x,y){
 	let nx,ny;
 	let nmines=0;
@@ -100,8 +118,9 @@ class Board{
 	}
 	}
 }
+
+	// Initiallizing a Board Object, with parameters from the prompt.
 	let gameBoard = new Board("",prompt("Enter height"),prompt("Enter width"),prompt("Enter number of mines"));
-	gameBoard.displayBoard();
 	console.table(gameBoard.nmines_array);
 	console.log(gameBoard.mines);
 
