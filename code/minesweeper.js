@@ -1,9 +1,6 @@
-
-
-//cancel flag on right-click
-//check extra flag on checkwin function
-
-
+// Implement a checkComplete function in class UI
+// Implement correct/incorrect mine flagged functionality
+// Improve the graphics a bit.
 
 class Board{
 	constructor (level,h,w,m){
@@ -103,13 +100,7 @@ class Board{
 	}
 	}
 }
-	let height;
-	let wide;
-	let minenumber;
-	height = prompt("Enter a height");
-	wide=prompt("Enter a wide");
-    minenumber=prompt("Enter number of mines");
-	let gameBoard = new Board("",height,wide,minenumber);
+	let gameBoard = new Board("",prompt("Enter height"),prompt("Enter width"),prompt("Enter number of mines"));
 	gameBoard.displayBoard();
 	console.table(gameBoard.nmines_array);
 	console.log(gameBoard.mines);
@@ -138,8 +129,8 @@ class UI{
 			tc =  "" + this.n_array[y][x];
 			gfx.component(x*50,y*50,tc);
 			this.n_array[y][x] = this.n_array[y][x]+10;
-			for (let i =x-1; i <= x+1; i++){
-				for (let j = y-1; j <= y+1; j++){
+			for (let i =y-1; i <= y+1; i++){
+				for (let j = x-1; j <= x+1; j++){
 					if (i>=0&&i<gameBoard.width&&j>=0&&j<gameBoard.height){	
 						//if(!(i==0 && j ==0))			
 							this.clickCheck(i,j);
