@@ -144,6 +144,7 @@ class UI{
 	clickCheck(y,x){
 		let tc = "";
 		this.revealed[y][x] = true;
+		gfx.context.strokeStyle = "red";
 		if(this.n_array[y][x]==0){
 			tc =  "" + this.n_array[y][x];
 			gfx.component(x*50,y*50,tc);
@@ -226,6 +227,7 @@ function clickHandler(e){
 	if(!ui.revealed[y][x])
 	if(!rightClick){
 		ui.revealed[y][x] = true;
+		gfx.context.strokeStyle = "red";
 		if((ui.n_array[y][x]>0)&&(ui.n_array[y][x]<9)){
 			tc =  "" + ui.n_array[y][x];
 			gfx.component(x*50,y*50,tc);
