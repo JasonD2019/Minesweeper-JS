@@ -19,7 +19,7 @@ class Board{
 					this.width(3);
 					this.mines(4);
 					this.initboard();
-					this.initMines(this.mines);
+					this.initMines(this.nmines);
 					this.initNmines();
 					break;
 			case "e":
@@ -27,7 +27,7 @@ class Board{
 					this.width(9);
 					this.mines(10);
 					this.initboard();
-					this.initMines(this.mines);
+					this.initMines(this.nmines);
 					this.initNmines();
 					break;
 			case "":
@@ -35,7 +35,7 @@ class Board{
 					this.width(w);
 					this.mines(m);
 					this.initboard();
-					this.initMines(this.mines);
+					this.initMines(this.nmines);
 					this.initNmines();
 					break;
 			default:
@@ -43,14 +43,14 @@ class Board{
 					this.width(5);
 					this.mines(6);
 					this.initboard();
-					this.initMines(this.mines);
+					this.initMines(this.nmines);
 					this.initNmines();
 					break;
 		}
 	}
 	// sets the number of mines.
 	mines(n){
-		this.mines = n;
+		this.nmines = n;
 	}
 	//sets the height of the board;
 	height(h){
@@ -120,9 +120,24 @@ class Board{
 }
 
 	// Initiallizing a Board Object, with parameters from the prompt.
-	let gameBoard = new Board("",prompt("Enter height"),prompt("Enter width"),prompt("Enter number of mines"));
-	console.table(gameBoard.nmines_array);
-	console.log(gameBoard.mines);
+let h = prompt("Enter height");
+let w = prompt("Enter width");
+let nm = prompt("Enter width");
+let gameBoard;
+
+if(nm<h*w && nm>0){
+gameBoard = new Board("",h,w,nm);
+}
+else{
+	if(nm>=h*w)
+	alert("Too many mines. Ouch!");
+	else
+	alert("Number of mines cant be zero!");
+	RestartGame();
+}
+
+console.table(gameBoard.nmines_array);
+console.log(gameBoard.nmines);
 
 
 class UI{
