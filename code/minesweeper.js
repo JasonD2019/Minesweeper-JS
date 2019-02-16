@@ -244,7 +244,7 @@ function clickHandler(e){
 			//{history.go(0);}//reload the webpage to reset game
 			//else if(choice =="n" )//if choice n quit game
 			//{
-				window.close();
+				//window.close();
 			//}
 			//else{alert("wrong choice");
 			//history.go(0);}
@@ -277,4 +277,11 @@ function clickHandler(e){
 			// clean the spot
 		}
 	}
+
+}
+function RestartGame(){
+	history.go(0);
+}
+function quitgame(){
+	window.close();
 }
