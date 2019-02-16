@@ -1,5 +1,3 @@
-// cancel flag on right-click
-// check extra flag on checkwin function
 
 class Board{
 	constructor (level,h,w,m){
@@ -176,11 +174,6 @@ function clickHandler(e){
 			alert("Game Over!");
 			RestartGame();
 		}
-		if (CheckWin()==true){
-			alert("You are win!");
-			let choice=prompt("Do you want to play again? y/n")
-			RestartGame();
-		}
 	}
 	else{
 		tc = "F";
@@ -191,8 +184,14 @@ function clickHandler(e){
 		}
 		else{
 			gameBoard.nmines_array[y][x] -= 20;
+			gfx.context.clearRect(x*50,y*50,50,50);
+			gfx.component(x*50,y*50);
 			// clean the spot
 		}
+	}
+	if (CheckWin()==true){
+		alert("You are win!");
+		RestartGame();
 	}
 }
 
@@ -219,15 +218,22 @@ function WhenChick_0(y,x){
 }
 
 function CheckWin(){
-	over = true;
+	let over = true;
+	let n_mine_flag = 0;
 	for (let i = 0; i < gameBoard.width; i++){
 		for (let j = 0; j < gameBoard.height; j++){
-			if (gameBoard.nmines_array[i][j] < 9){				
-				over = false;
+			if (gameBoard.nmines_array[i][j] == 29){
+				n_mine_flag++;
+			}
+			if (gameBoard.nmines_array[i][j] >= 20 && gameBoard.nmines_array[i][j] < 29){
+				return false;
 			}
 		}
 	}
-	return over;
+	if (n_mine_flag == gameBoard.mines)
+	{
+		return over;
+	}
 }
 
 function RestartGame(){
