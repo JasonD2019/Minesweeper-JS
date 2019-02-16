@@ -270,7 +270,7 @@ function quitgame(){
 }
 
 function checkComplete(){
-	let over = true;
+	let over = false;
 	let n_mine_flag = 0;
 	for (let i = 0; i < gameBoard.width; i++){
 		for (let j = 0; j < gameBoard.height; j++){
@@ -278,12 +278,13 @@ function checkComplete(){
 				n_mine_flag++;
 			}
 			if (ui.n_array[i][j] >= 20 && ui.n_array[i][j] < 29){
-				return false;
+				return over;
 			}
 		}
 	}
 	if (n_mine_flag == gameBoard.mines)
 	{
+		over = true;
 		return over;
 	}
 }
