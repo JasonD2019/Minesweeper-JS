@@ -8,7 +8,7 @@ Prerequisites:
 
 
 ![image](http://github.com/saharshgupta/Minesweeper-JS/raw/master/Documentation/images/002.PNG)
-
+![image](http://github.com/saharshgupta/Minesweeper-JS/raw/master/Documentation/images/001.PNG)
 
 Run the index.html file under code folder to run the game.
 
