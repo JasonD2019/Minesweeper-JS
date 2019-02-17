@@ -164,10 +164,11 @@ class UI{
 	clickCheck(x,y){
 		let tc = "";
 		this.revealed[x][y] = true;
-		gfx.context.strokeStyle = "red";
+		gfx.context.strokeStyle = 'rgba(0,255,0,0.6)';
+		gfx.context.shadowColor = "green";
 		if(this.n_array[x][y]==0){
-			tc =  "" + this.n_array[x][y];
-			gfx.component(x*50,y*50,tc);
+			//tc =  "" + this.n_array[x][y];
+			gfx.component(x*50,y*50);
 			this.n_array[x][y] = this.n_array[x][y]+10;
 			for (let i =x-1; i <= x+1; i++){
 				for (let j = y-1; j <= y+1; j++){
@@ -226,6 +227,7 @@ class Graphics{
 		//this.canvas.style = "border: 1px solid #d3d3d3";
 		this.context = this.canvas.getContext("2d");
 		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+		this.nflags = gameBoard.nmines;
 		this.draw();		
 		}
 	component(x,y,t=""){
@@ -237,6 +239,8 @@ class Graphics{
 		this.context.fillText(t,x+25,y+25);
 	}
 	draw(){
+		this.context.strokeStyle = 'rgba(0,0,0,0.2)';
+		this.context.shadowColor = 'rgba(0,0,0,0.2)';
 		for(let i =0; i<gameBoard.width;i++){
 			this.comp[i] = [];
 			for(let j =0; j<gameBoard.height;j++){
@@ -248,6 +252,7 @@ class Graphics{
 
 let ui = new UI();
 let gfx = new Graphics();
+document.getElementById("flags").innerHTML = "Flags: " + gfx.nflags;
 
 gfx.canvas.addEventListener('click',clickHandler);
 gfx.canvas.addEventListener('contextmenu',clickHandler);
@@ -266,7 +271,8 @@ function clickHandler(e){
 	if(!ui.revealed[x][y])
 	if(!rightClick){
 		ui.revealed[x][y] = true;
-		gfx.context.strokeStyle = "red";
+		gfx.context.strokeStyle = 'rgba(0,255,0,0.6)';
+		gfx.context.shadowColor = 'rgba(0,255,0,0.6)';
 		if((ui.n_array[x][y]>0)&&(ui.n_array[x][y]<9)){
 			tc =  "" + ui.n_array[x][y];
 			gfx.component(x*50,y*50,tc);
@@ -284,17 +290,22 @@ function clickHandler(e){
 	}
 	else{
 		tc = "F";
+		gfx.context.strokeStyle = 'rgba(255,0,0,1)';
+		gfx.context.shadowColor = 'rgba(255,0,0,1)';
 		if(ui.n_array[x][y]<20)
 		{
 			ui.n_array[x][y] += 20;
+			gfx.nflags--;
 			gfx.component(x*50,y*50,tc);
 		}
 		else{
 			ui.n_array[x][y] -= 20;
+			gfx.nflags++;
 			gfx.context.clearRect(x*50,y*50,50,50);
 			gfx.component(x*50,y*50);
 			// clean the spot
 		}
+		document.getElementById("flags").innerHTML = "Flags: " + gfx.nflags;
 	}
 	if (ui.checkComplete()){
 		alert("You won!");
