@@ -7,7 +7,7 @@ Prerequisites:
            This game is based on JavaScript. If you want to play this game. You have to run this game on browser. (Chrome recommended).
 
 
-![image](http://github.com/saharshgupta/Minesweeper-JS/raw/master/Documentation/images/002.jpg)
+![image](http://github.com/saharshgupta/Minesweeper-JS/raw/master/Documentation/images/002.PNG)
 
 
 Run the index.html file under code folder to run the game.
