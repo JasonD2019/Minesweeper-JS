@@ -10,7 +10,7 @@ Prerequisites:
 
 
 
-Run the index.html file under <code> folder to run the game.
+Run the index.html file under code folder to run the game.
 
 
 Creator: Xingjian Ding, Saharsh Gupta, Hanwen Jia.
