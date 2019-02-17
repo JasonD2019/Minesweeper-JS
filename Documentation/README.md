@@ -6,7 +6,6 @@ User can choose the map size, number of mines and user also can mark the bomb wi
 Prerequisites:
            This game is based on JavaScript. If you want to play this game. You have to run this game on browser. (Chrome recommended).
 
-Game picture:
 
 
 
