@@ -1,14 +1,16 @@
-// Implement a checkComplete function in class UI
-// Implement correct/incorrect mine flagged functionality
-// Implement Number of mines remaining.
-// Improve the graphics a bit.
 
-
-
-// This is a class for board, the game board is initiallized here with the given width, height,
-// and number of mines
+/**  
+ * @classdesc The game board is initiallized here with the given width, height, and number of mines 
+ * @constructor
+ * @param {String} level - What level is the game initialized.
+ * @param {Number} height - Height of the game board.
+ * @param {Number} width - Width of the game board.
+ * @param {Number} nmines - Number of mines the board needs to be initiallized.
+ * */
 class Board{
-	//default constructor of the board class.
+	/**  
+ 	* The default constructor of this lass initializes arrays, i.e. the game board needed.
+	*/
 	constructor (level,h,w,m){		
 		this.board = [];			// Initiallizing the board array;
 		this.nmines_array = [];		// Initiallizing the number of mines surrounding array.
@@ -48,19 +50,30 @@ class Board{
 					break;
 		}
 	}
-	// sets the number of mines.
+	/**  
+	 * Sets the number of mines.
+	 * @param {Number} n - number of mines.
+	*/
 	mines(n){
 		this.nmines = n;
 	}
-	//sets the height of the board;
+	/**  
+	 * Sets the height of the board.
+	 * @param {Number} h - Height of the board.
+	*/
 	height(h){
 		this.height = h;
 	}
-	// sets the width of the board;
+	/**  
+	 * Sets the Width of the board
+	 * @param {Number} w - Width of the board.
+	*/
 	width(w){
 		this.width =w;
 	}
-	//Initiallizes the baord array and nmines array with default values, no mines all 0's.
+	/**  
+	 * Initiallizes the board initially with 0's that is no mines, Also initializes the number of mines surrounding array with 0 for now as well.
+	*/
 	initboard(){
 		for (let i=0;i<this.width;i++){
 			this.board[i] = [];
@@ -71,7 +84,10 @@ class Board{
 			}
 		}
 	}
-	//Sets the given number of mines in the board, i.e. initiallize the board array with 1;
+	/**  
+	 * Initiallizes the board with the number of mines given, i.e. initializes with a 1 that is a bomb.
+	 * @param {Number} nmines - Number of mines being initialized. 
+	*/
 	initMines(nmines){
 		if(nmines !=0){		// Break condition, breaks when there are no remaining mines to set.
 			let x = Math.floor(Math.random()*this.width); //Get a random x coordinate, multiplying width/height with a random [0,1], and then floor gives us an index in range.
@@ -84,7 +100,9 @@ class Board{
 		}
 	}
 
-	//Initiallizes the number of mines arround array with what countMines(x,y) returns and returns a number for nmines_array.
+	/**  
+	 * Initiallizes the number of mines surrounding a tile array with the countMines returns.
+	*/
 	initNmines(){
 		for (let i = 0; i<this.width; i++){
 			for (let j = 0; j<this.height;j++){
@@ -93,7 +111,11 @@ class Board{
 		}
 	}
 
-	// Counts the number of mines surrounding the tile.
+	/**  
+	 * Counts the number of bombs adjacent to a tile, in all 8 directions.
+	 * @param {Number} x - The x index.
+	 * @param {Number} y - The y index.
+	*/
 	countMines(x,y){
 	let nx,ny;
 	let nmines=0;
@@ -119,13 +141,15 @@ class Board{
 	}
 }
 
-// Initiallizing a Board Object, with parameters from the prompt.
 let h = prompt("Enter height");
 let w = prompt("Enter width");
 let nm = prompt("Enter number of mines");
 let gameBoard;
 if(h>1 && w>1){
 if(nm<h*w && nm>0){
+/**  
+ * Initializing the gameBoard the object of Board class.
+*/
 gameBoard = new Board("",h,w,nm);
 }
 else{
@@ -145,12 +169,21 @@ console.table(gameBoard.nmines_array);
 console.log(gameBoard.nmines);
 
 
+/**  
+ * @classdesc The game UI is handled by the UI class, how the tiles are revealed and handled.
+ */
 class UI{
+	/**  
+ 	* The constructor for the UI class takes no parameters, but initializes arrays that are needed for the run.
+	*/
 	constructor(){
 		this.revealed = [];
 		this.n_array = [];
 		this.init();
 	}
+	/**  
+ 	* Initializing the UI n_array with values from the Board class nmines_array and revealed state of a tile to false.
+	*/
 	init(){
 		for(let i=0;i<gameBoard.width;i++){
 			this.revealed [i] = [];
@@ -161,11 +194,16 @@ class UI{
 			}
 		}
 	}
+	/**  
+ 	* Checks for click and on click if the tile was a lonely tile, i.e. surrounded by no mines this function expands that tile in all 8 directions. 
+	* @param {Number} x - The x coordinate of the tile clicked.
+	* @param {Number} y - The y coordinate of the tile clicked.
+	 */
 	clickCheck(x,y){
 		let tc = "";
 		this.revealed[x][y] = true;
-		gfx.context.strokeStyle = 'rgba(0,255,0,0.6)';
-		gfx.context.shadowColor = "green";
+		gfx.context.strokeStyle = 'rgba(0,0,255,0.6)';
+		gfx.context.shadowColor = 'rgba(0,0,255,0.6)';
 		if(this.n_array[x][y]==0){
 			//tc =  "" + this.n_array[x][y];
 			gfx.component(x*50,y*50);
@@ -186,17 +224,9 @@ class UI{
 		}
 	}
 	
-	CheckWin(){
-		let over = true;
-		for (let i = 0; i < gameBoard.width; i++){
-			for (let j = 0; j < gameBoard.height; j++){
-				if (this.n_array[i][j] < 9){				
-					over = false;
-				}
-			}
-		}
-		return over;
-	}
+	/**  
+ 	* Checks if the baord is completed with all the flags correctly placed, if not user cant win.
+	*/
 	checkComplete(){
 		let over = false;
 		let n_mine_flag = 0;
@@ -218,7 +248,13 @@ class UI{
 	}
 }
 
+/**  
+ * @classdesc The game graphics are handled by the Grphics class, how the numbers are going to populate on the HTML/User side visual and inputs. 
+*/
 class Graphics{
+	/**  
+	 * The default constructor takes no parameters and makes a Canvas (A game area) on the HTML to be populated.
+	*/
 	constructor(){
 		this.comp = [];
 		this.canvas = document.createElement("canvas");
@@ -230,6 +266,11 @@ class Graphics{
 		this.nflags = gameBoard.nmines;
 		this.draw();		
 		}
+	/**  
+	 * Makes the specific components in the Canvas, i.e. the tiles for the game.
+	 * @param {Number} x - The x coordinate of the component to be made.
+	 * @param {Number} y - The y coordinate of the component to be made.
+	*/
 	component(x,y,t=""){
 		this.width = 50;
 		this.height = 50;
@@ -238,6 +279,10 @@ class Graphics{
 		this.context.strokeRect(this.x, this.y, this.width, this.height);
 		this.context.fillText(t,x+25,y+25);
 	}
+
+	/**  
+ 	* This method makes all the components at the time when the game starts i.e. the game is initialized.
+	*/
 	draw(){
 		this.context.strokeStyle = 'rgba(0,0,0,0.2)';
 		this.context.shadowColor = 'rgba(0,0,0,0.2)';
@@ -250,14 +295,27 @@ class Graphics{
 	}
 }
 
+/**  
+ 	* Making an object of UI class named ui.
+*/
 let ui = new UI();
+/**  
+ 	* Making an object of Graphics class named gfx.
+*/
 let gfx = new Graphics();
 document.getElementById("flags").innerHTML = "Flags: " + gfx.nflags;
 
 gfx.canvas.addEventListener('click',clickHandler);
 gfx.canvas.addEventListener('contextmenu',clickHandler);
 
+/**  
+	 * This is the only global function, this is a clickHandler, this handles the clicks on the canvas and detects which component was clicked and updates it.
+	 @param {Event} e - This is the click event given by the addEventListener function.
+*/
 function clickHandler(e){
+	/**  
+ 	* This prevents the default context menu on right click.
+	*/
 	e.preventDefault();
 	let tc ="";
 	let clickX = e.pageX - gfx.canvas.offsetLeft;
@@ -271,8 +329,8 @@ function clickHandler(e){
 	if(!ui.revealed[x][y])
 	if(!rightClick){
 		ui.revealed[x][y] = true;
-		gfx.context.strokeStyle = 'rgba(0,255,0,0.6)';
-		gfx.context.shadowColor = 'rgba(0,255,0,0.6)';
+		gfx.context.strokeStyle = 'rgba(0,0,255,0.6)';
+		gfx.context.shadowColor = 'rgba(0,0,255,0.6)';
 		if((ui.n_array[x][y]>0)&&(ui.n_array[x][y]<9)){
 			tc =  "" + ui.n_array[x][y];
 			gfx.component(x*50,y*50,tc);
@@ -284,17 +342,14 @@ function clickHandler(e){
 		if(ui.n_array[x][y]==9){
 			alert("Game Over!");
 		}
-		// if (ui.CheckWin()){
-		// 	alert("You won!");
-		// }
 	}
 	else{
 		tc = "F";
-		gfx.context.strokeStyle = 'rgba(255,0,0,1)';
-		gfx.context.shadowColor = 'rgba(255,0,0,1)';
 		if(ui.n_array[x][y]<20)
 		{
 			ui.n_array[x][y] += 20;
+			gfx.context.strokeStyle = 'rgba(255,0,0,0.6)';
+			gfx.context.shadowColor = 'rgba(255,0,0,0.6)';
 			gfx.nflags--;
 			gfx.component(x*50,y*50,tc);
 		}
@@ -302,6 +357,8 @@ function clickHandler(e){
 			ui.n_array[x][y] -= 20;
 			gfx.nflags++;
 			gfx.context.clearRect(x*50,y*50,50,50);
+			gfx.context.strokeStyle = 'rgba(0,0,0,0.2)';
+			gfx.context.shadowColor = 'rgba(0,0,0,0.2)';
 			gfx.component(x*50,y*50);
 			// clean the spot
 		}
