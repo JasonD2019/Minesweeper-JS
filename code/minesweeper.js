@@ -315,6 +315,3 @@ function clickHandler(e){
 function RestartGame(){
 	history.go(0);
 }
-function quitgame(){
-	window.close();
-}
