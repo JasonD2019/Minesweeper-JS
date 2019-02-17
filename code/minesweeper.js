@@ -119,12 +119,12 @@ class Board{
 	}
 }
 
-	// Initiallizing a Board Object, with parameters from the prompt.
+// Initiallizing a Board Object, with parameters from the prompt.
 let h = prompt("Enter height");
 let w = prompt("Enter width");
-let nm = prompt("Enter width");
+let nm = prompt("Enter number of mines");
 let gameBoard;
-
+if(h>1 && w>1){
 if(nm<h*w && nm>0){
 gameBoard = new Board("",h,w,nm);
 }
@@ -133,6 +133,11 @@ else{
 	alert("Too many mines. Ouch!");
 	else
 	alert("Number of mines cant be zero!");
+	RestartGame();
+}
+}
+else{
+	alert("Height or Width cant be less than 2");
 	RestartGame();
 }
 
@@ -190,6 +195,25 @@ class UI{
 			}
 		}
 		return over;
+	}
+	checkComplete(){
+		let over = false;
+		let n_mine_flag = 0;
+		for (let i = 0; i < gameBoard.width; i++){
+			for (let j = 0; j < gameBoard.height; j++){
+				if (this.n_array[i][j] == 29){
+					n_mine_flag++;
+				}
+				if (this.n_array[i][j] >= 20 && this.n_array[i][j] < 29){
+					return over;
+				}
+			}
+		}
+		if (n_mine_flag == gameBoard.nmines)
+		{
+			over = true;
+			return over;
+		}
 	}
 }
 
@@ -253,30 +277,10 @@ function clickHandler(e){
 		}
 		if(ui.n_array[x][y]==9){
 			alert("Game Over!");
-			//need to restart the game 
-			//let choice=prompt("Do you want to play again? y/n")
-			//if(choice =="y" )
-			//{history.go(0);}//reload the webpage to reset game
-			//else if(choice =="n" )//if choice n quit game
-			//{
-				//window.close();
-			//}
-			//else{alert("wrong choice");
-			//history.go(0);}
 		}
-		if (ui.CheckWin()){
-			alert("You won!");
-			/*need to restart the game 
-			let choice=prompt("Do you want to play again? y/n")
-			if(choice == "y" )
-			{history.go(0);}//reload the webpage to reset game
-			else if(choice == "n")//if choice n quit game
-			{
-				window.close();
-			}
-			else{alert("wrong choice");
-			history.go(0);}*/
-		}
+		// if (ui.CheckWin()){
+		// 	alert("You won!");
+		// }
 	}
 	else{
 		tc = "F";
@@ -291,6 +295,9 @@ function clickHandler(e){
 			gfx.component(x*50,y*50);
 			// clean the spot
 		}
+	}
+	if (ui.checkComplete()){
+		alert("You won!");
 	}
 
 }
