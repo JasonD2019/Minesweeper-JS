@@ -34,7 +34,7 @@ The whole code is written from scratch only a few function calls are from the we
 
            https://stackoverflow.com/
 
-      2.	 w3schools:- Specifically for the Graphics class, this resource provided us with the information about Canvas in HTML, did                           use the function calls from there and how they were used.
+      2.	 w3schools:- Specifically for the Graphics class, this resource provided us with the information about Canvas in HTML, did use the function calls from there and how they were used.
 
            https://www.w3schools.com/
 
