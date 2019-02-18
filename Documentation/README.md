@@ -24,13 +24,14 @@ Run the index.html file under code folder to run the game.
 Authors: Xingjian Ding, Saharsh Gupta, Hanwen Jia.
 
 Resources used:
+
 The whole code is written from scratch only a few function calls are from the web, we did use these two websites for any error we faced and to find the functionality in JS we needed to use.
 
-stackoverflow:- For all the errors in the implementation of the code. This resource helped us with many questions in the code.
+      1. stackoverflow:- For all the errors in the implementation of the code. This resource helped us with many questions in the code.
 
            https://stackoverflow.com/
 
-      2.	 w3schools:- Specifically for the Graphics class, this resource provided us with the information about Canvas in HTML, did use the function calls from there and how they were used.
+      2.	 w3schools:- Specifically for the Graphics class, this resource provided us with the information about Canvas in HTML, did                           use the function calls from there and how they were used.
 
-https://www.w3schools.com/
+           https://www.w3schools.com/
 
