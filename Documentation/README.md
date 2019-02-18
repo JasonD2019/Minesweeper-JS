@@ -2,8 +2,8 @@ Project name: Minesweeper game
 
 
 
-Description: This is a puzzle game. The objective of the game is to clear a rectangular board containing hidden mines without click any of them, with help from clues about the number of neighboring mines in 8 directions. 
-User can choose the map size, number of mines and user also can mark the bomb with flag on the board .
+Description: This is a puzzle game. The objective of the game is to clear a rectangular board containing hidden mines without clicking any of them, using clues about the number of neighboring mines in any of the 8 directions. 
+User can choose the map size, number of mines and user can also mark the bomb with a flag on the board .
 
 
 Prerequisites:
@@ -21,14 +21,16 @@ Game picture:
 Run the index.html file under code folder to run the game.
 
 
-Creator: Xingjian Ding, Saharsh Gupta, Hanwen Jia.
+Authors: Xingjian Ding, Saharsh Gupta, Hanwen Jia.
 
-Works cited section:
+Resources used:
+The whole code is written from scratch only a few function calls are from the web, we did use these two websites for any error we faced and to find the functionality in JS we needed to use.
 
-	In summary, we did not copy any code from anywhere. However we used the two web below to solve some problems and look for functions.
+stackoverflow:- For all the errors in the implementation of the code. This resource helped us with many questions in the code.
 
-           stackoverflow
            https://stackoverflow.com/
 
-      2.	 w3schools
-          https://www.w3schools.com/
+      2.	 w3schools:- Specifically for the Graphics class, this resource provided us with the information about Canvas in HTML, did use the function calls from there and how they were used.
+
+https://www.w3schools.com/
+
