@@ -10,9 +10,9 @@ Prerequisites:
            This game is based on JavaScript. If you want to play this game. You have to run this game on browser. (Chrome recommended).
 
 Game picture:
-![image](http://github.com/saharshgupta/Minesweeper-JS/raw/master/Documentation/images/002.PNG)
+![002](http://github.com/saharshgupta/Minesweeper-JS/raw/master/Documentation/images/002.PNG)
 
-![image](http://github.com/saharshgupta/Minesweeper-JS/raw/master/Documentation/images/001.PNG)
+![001](http://github.com/saharshgupta/Minesweeper-JS/raw/master/Documentation/images/001.PNG)
 
 
 
@@ -24,10 +24,11 @@ Run the index.html file under code folder to run the game.
 Creator: Xingjian Ding, Saharsh Gupta, Hanwen Jia.
 
 Works cited section:
+
 	In summary, we did not copy any code from anywhere. However we used the two web below to solve some problems and look for functions.
 
-stackoverflow
+           stackoverflow
            https://stackoverflow.com/
 
       2.	 w3schools
-https://www.w3schools.com/
+          https://www.w3schools.com/
