@@ -18,7 +18,10 @@ Game picture:
 
 
 
+How to run:
 Run the index.html file under code folder to run the game.
+A left click reveals the tiles if they are not a mine.
+A right click flags a tile if it is not revealed or flagged, or removes the flag if it is flagged.
 
 
 Authors: Xingjian Ding, Saharsh Gupta, Hanwen Jia.
