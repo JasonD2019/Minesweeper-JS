@@ -22,3 +22,12 @@ Run the index.html file under code folder to run the game.
 
 
 Creator: Xingjian Ding, Saharsh Gupta, Hanwen Jia.
+
+Works cited section:
+	In summary, we did not copy any code from anywhere. However we used the two web below to solve some problems and look for functions.
+
+stackoverflow
+           https://stackoverflow.com/
+
+      2.	 w3schools
+https://www.w3schools.com/
